@@ -3,8 +3,14 @@
     <h1>
       {{ titulo }}
     </h1>
+    <input
+      type="search"
+      class="filtro"
+      placeholder="Filtre pelo título"
+      @input="filtro = $event.target.value"
+    />
     <ul>
-      <li v-for="foto in fotos" :key="foto.url">
+      <li v-for="foto in fotosComFiltro" :key="foto.url">
         <meu-painel :titulo="foto.titulo">
           <img class="painel-img" :src="foto.url" :alt="foto.titulo" />
         </meu-painel>
@@ -20,6 +26,7 @@ export default {
     return {
       titulo: "Alurapic",
       fotos: [],
+      filtro: "",
     };
   },
 
@@ -31,6 +38,17 @@ export default {
         (fotos) => (this.fotos = fotos),
         (err) => console.log(err)
       );
+  },
+
+  computed: {
+    fotosComFiltro() {
+      if (this.filtro) {
+        let exp = new RegExp(this.filtro.trim(), "i");
+        return this.fotos.filter((foto) => exp.test(foto.titulo));
+      } else {
+        return this.fotos;
+      }
+    },
   },
 
   components: {
@@ -59,5 +77,11 @@ ul {
 
 .painel-img {
   width: 100%;
+}
+
+.filtro {
+  display: block;
+  width: 100%;
+  padding: 1rem;
 }
 </style>
