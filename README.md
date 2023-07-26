@@ -1,4 +1,6 @@
-# alura-pic
+# Alura Vue Course
+
+Repositório criado para acompanhar o curso de Vue fornecido pela plafatorma Alura.
 
 ## Project setup
 ```
