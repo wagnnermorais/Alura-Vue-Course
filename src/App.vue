@@ -5,13 +5,16 @@
     </h1>
     <ul>
       <li v-for="foto in fotos" :key="foto.url">
-        <img :src="foto.url" :alt="foto.titulo" />
+        <meu-painel :titulo="foto.titulo">
+          <img class="painel-img" :src="foto.url" :alt="foto.titulo" />
+        </meu-painel>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import Painel from "./components/Painel.vue";
 export default {
   data() {
     return {
@@ -29,6 +32,10 @@ export default {
         (err) => console.log(err)
       );
   },
+
+  components: {
+    "meu-painel": Painel,
+  },
 };
 </script>
 
@@ -37,7 +44,20 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: Helvetica, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.painel-img {
+  width: 100%;
 }
 </style>
