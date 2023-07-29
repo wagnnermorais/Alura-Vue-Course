@@ -16,6 +16,7 @@
             :url="foto.url"
             :titulo="foto.titulo"
           ></image-component>
+          <Button tipo="button" rotulo="Remover" @botaoAtivado="remove(foto)" />
         </meu-painel>
       </li>
     </ul>
@@ -25,6 +26,7 @@
 <script>
 import Imagens from "../components/Imagens.vue";
 import Painel from "../components/Painel.vue";
+import Button from "@/components/Button.vue";
 export default {
   data() {
     return {
@@ -32,6 +34,12 @@ export default {
       fotos: [],
       filtro: "",
     };
+  },
+
+  methods: {
+    remove(foto) {
+      alert(`Foto ${foto.titulo} removida!`);
+    },
   },
 
   created() {
@@ -58,6 +66,7 @@ export default {
   components: {
     "meu-painel": Painel,
     "image-component": Imagens,
+    Button,
   },
 };
 </script>
