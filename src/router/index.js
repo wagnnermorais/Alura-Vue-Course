@@ -1,14 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Cadastro from "@/views/Cadastro.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
     path: "/",
-    name: "home",
+    name: "Home",
     component: Home,
+  },
+  {
+    path: "/cadastro",
+    name: "Cadastro",
+    component: Cadastro,
   },
 ];
 
