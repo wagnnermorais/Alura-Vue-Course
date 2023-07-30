@@ -15,6 +15,7 @@
           <image-component
             :url="foto.url"
             :titulo="foto.titulo"
+            v-transform:scale.animate="1.2"
           ></image-component>
           <Button
             tipo="button"
@@ -33,6 +34,7 @@
 import Imagens from "../components/Imagens.vue";
 import Painel from "../components/Painel.vue";
 import Button from "@/components/Button.vue";
+import transform from "../directives/Transform";
 export default {
   data() {
     return {
@@ -73,6 +75,10 @@ export default {
     "meu-painel": Painel,
     "image-component": Imagens,
     Button,
+  },
+
+  directives: {
+    transform,
   },
 };
 </script>
