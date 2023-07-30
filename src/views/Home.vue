@@ -16,7 +16,13 @@
             :url="foto.url"
             :titulo="foto.titulo"
           ></image-component>
-          <Button tipo="button" rotulo="Remover" @botaoAtivado="remove(foto)" />
+          <Button
+            tipo="button"
+            rotulo="Remover"
+            @botaoAtivado="remove(foto)"
+            :confirmacao="true"
+            estilo="perigo"
+          />
         </meu-painel>
       </li>
     </ul>
