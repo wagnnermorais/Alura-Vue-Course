@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="container">
     <h1>
       {{ titulo }}
     </h1>
@@ -8,11 +8,11 @@
       type="search"
       class="filtro"
       placeholder="Filtre pelo título"
-      @input="filtro = $event.target.value"
+      v-model="filtro"
     />
     <ul>
       <li v-for="foto in fotosComFiltro" :key="foto.url">
-        <meu-painel :titulo="foto.titulo">
+        <card-component :titulo="foto.titulo">
           <image-component
             :url="foto.url"
             :titulo="foto.titulo"
@@ -28,7 +28,7 @@
             :confirmacao="true"
             estilo="perigo"
           />
-        </meu-painel>
+        </card-component>
       </li>
     </ul>
   </div>
@@ -51,24 +51,26 @@ export default {
   },
 
   methods: {
-    remove(foto) {
-      this.service.apaga(foto._id).then(
-        () => {
+    async remove(foto) {
+      try {
+        await this.service.apaga(foto._id).then(() => {
           let indice = this.fotos.indexOf(foto);
           this.fotos.splice(indice, 1);
-          this.mensagem = "Foto removida com sucesso";
-        },
-        (err) => (this.mensagem = err.message)
-      );
+          this.mensagem = alert("Foto removida com sucesso");
+        });
+      } catch (err) {
+        this.mensagem = err.message;
+      }
     },
   },
 
   created() {
-    this.service = new Service(this.$resource);
-    this.service.lista().then(
-      (fotos) => (this.fotos = fotos),
-      (err) => (this.mensagem = err.message)
-    );
+    try {
+      this.service = new Service(this.$resource);
+      this.service.lista().then((fotos) => (this.fotos = fotos));
+    } catch (err) {
+      this.mensagem = err.message;
+    }
   },
 
   computed: {
@@ -83,7 +85,7 @@ export default {
   },
 
   components: {
-    "meu-painel": Painel,
+    "card-component": Painel,
     "image-component": Imagens,
     Button,
   },
@@ -94,14 +96,7 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: Helvetica, sans-serif;
-}
-
+<style scoped>
 h1,
 p {
   text-align: center;

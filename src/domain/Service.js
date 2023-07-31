@@ -10,10 +10,11 @@ export default class Service {
     return this._resource.save(foto);
   }
 
+  // prettier-ignore
   lista() {
-    return this._resource.query().then(
-      (res) => res.json(),
-      (err) => {
+    return this._resource.query()
+    .then((res) => res.json(),
+    (err) => {
         console.log(err);
         throw new Error("Não foi possível obter as fotos. Tente mais tarde!");
       }

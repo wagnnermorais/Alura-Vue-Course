@@ -12,14 +12,9 @@ export default {
         } else {
           current += incremento;
         }
-
         efeito = `rotate(${current}deg)`;
-      } else if (binding.arg == "scale") {
-        efeito = `scale(${incremento})`;
       }
-
       el.style.transform = efeito;
-
       if (binding.modifiers.animate) el.style.transition = "transform 0.5s";
     });
   },

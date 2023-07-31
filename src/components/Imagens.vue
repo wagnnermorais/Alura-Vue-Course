@@ -10,7 +10,17 @@ export default {
     return {};
   },
 
-  props: ["url", "titulo"],
+  props: {
+    url: {
+      type: String,
+      required: true,
+    },
+
+    titulo: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>
 
