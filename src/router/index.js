@@ -20,6 +20,14 @@ export const routes = [
     menu: true,
     component: Cadastro,
   },
+  // rota duplicada para deixar a alteração de card dinâmica
+  {
+    path: "/cadastro/:id",
+    name: "altera",
+    title: "Cadastro",
+    menu: false,
+    component: Cadastro,
+  },
   {
     path: "*",
     menu: false,

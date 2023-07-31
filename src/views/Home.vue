@@ -17,7 +17,10 @@
             :url="foto.url"
             :titulo="foto.titulo"
             v-transform:scale.animate="1.2"
-          ></image-component>
+          />
+          <router-link :to="{ name: 'altera', params: { id: foto._id } }">
+            <Button tipo="button" rotulo="Alterar" />
+          </router-link>
           <Button
             tipo="button"
             rotulo="Remover"
@@ -55,10 +58,7 @@ export default {
           this.fotos.splice(indice, 1);
           this.mensagem = "Foto removida com sucesso";
         },
-        (err) => {
-          this.mensagem = "Não foi possível remover a foto";
-          console.log(err);
-        }
+        (err) => (this.mensagem = err.message)
       );
     },
   },
@@ -67,7 +67,7 @@ export default {
     this.service = new Service(this.$resource);
     this.service.lista().then(
       (fotos) => (this.fotos = fotos),
-      (err) => console.log(err)
+      (err) => (this.mensagem = err.message)
     );
   },
 
