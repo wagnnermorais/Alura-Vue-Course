@@ -3,6 +3,7 @@
     <h1>
       {{ titulo }}
     </h1>
+    <p v-show="mensagem">{{ mensagem }}</p>
     <input
       type="search"
       class="filtro"
@@ -34,30 +35,40 @@
 import Imagens from "../components/Imagens.vue";
 import Painel from "../components/Painel.vue";
 import Button from "@/components/Button.vue";
-import transform from "../directives/Transform";
+import transform from "@/directives/Transform";
+import Service from "@/domain/Service";
 export default {
   data() {
     return {
       titulo: "Alurapic",
       fotos: [],
       filtro: "",
+      mensagem: "",
     };
   },
 
   methods: {
     remove(foto) {
-      alert(`Foto ${foto.titulo} removida!`);
+      this.service.apaga(foto._id).then(
+        () => {
+          let indice = this.fotos.indexOf(foto);
+          this.fotos.splice(indice, 1);
+          this.mensagem = "Foto removida com sucesso";
+        },
+        (err) => {
+          this.mensagem = "Não foi possível remover a foto";
+          console.log(err);
+        }
+      );
     },
   },
 
   created() {
-    let promise = this.$http.get("http://localhost:3000/v1/fotos");
-    promise
-      .then((response) => response.json())
-      .then(
-        (fotos) => (this.fotos = fotos),
-        (err) => console.log(err)
-      );
+    this.service = new Service(this.$resource);
+    this.service.lista().then(
+      (fotos) => (this.fotos = fotos),
+      (err) => console.log(err)
+    );
   },
 
   computed: {
@@ -91,7 +102,8 @@ export default {
   font-family: Helvetica, sans-serif;
 }
 
-h1 {
+h1,
+p {
   text-align: center;
 }
 
