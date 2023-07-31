@@ -6,29 +6,25 @@
 
     <form @submit.prevent="grava()">
       <div class="controle">
-        <label for="titulo">TÍTULO</label>
+        <label for="titulo">Título</label>
         <input id="titulo" autocomplete="off" v-model="foto.titulo" />
       </div>
 
       <div class="controle">
-        <label for="url">URL</label>
+        <label for="url">Url</label>
         <input id="url" autocomplete="off" v-model.lazy="foto.url" />
         <image-component :url="foto.url" />
       </div>
 
       <div class="controle">
-        <label for="descricao">DESCRIÇÃO</label>
-        <textarea
-          id="descricao"
-          autocomplete="off"
-          v-model="foto.descricao"
-        ></textarea>
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" autocomplete="off" v-model="foto.descricao" />
       </div>
 
       <div class="centralizado">
-        <Button rotulo="GRAVAR" tipo="submit" />
+        <Button rotulo="Gravar" tipo="submit" />
         <router-link :to="{ name: 'home' }">
-          <Button rotulo="VOLTAR" tipo="button" />
+          <Button rotulo="Voltar" tipo="button" />
         </router-link>
       </div>
     </form>
@@ -50,16 +46,17 @@ export default {
   },
 
   methods: {
-    grava() {
-      this.service.cadastra(this.foto).then(
-        () => {
+    async grava() {
+      try {
+        await this.service.cadastra(this.foto).then(() => {
           if (this.id) {
             this.$router.push({ name: "home" });
           }
           this.foto = new Foto();
-        },
-        (err) => console.log(err)
-      );
+        });
+      } catch (err) {
+        this.mensagem = err.message;
+      }
     },
   },
 

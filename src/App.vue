@@ -24,11 +24,18 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
+body {
+  background: #ededed;
+}
+
 #app {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .fade-enter,
