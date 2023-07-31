@@ -1,9 +1,9 @@
 <template>
   <nav>
     <ul>
-      <li v-for="rota in rotas">
+      <li v-for="rota in rotas" :key="rota.path">
         <router-link :to="rota.path">
-          {{ rota.name }}
+          {{ rota.title }}
         </router-link>
       </li>
     </ul>

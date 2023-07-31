@@ -1,5 +1,3 @@
-<!-- alurapic/src/components/cadastro/Cadastro.vue -->
-
 <template>
   <div>
     <h1 class="centralizado">Cadastro</h1>
@@ -28,9 +26,9 @@
 
       <div class="centralizado">
         <Button rotulo="GRAVAR" tipo="submit" />
-        <router-link to="/"
-          ><Button rotulo="VOLTAR" tipo="button"
-        /></router-link>
+        <router-link :to="{ name: 'home' }">
+          <Button rotulo="VOLTAR" tipo="button" />
+        </router-link>
       </div>
     </form>
   </div>

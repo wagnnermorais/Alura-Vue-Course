@@ -7,14 +7,23 @@ Vue.use(VueRouter);
 
 export const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: "/home",
+    name: "home",
+    title: "Home",
+    menu: true,
     component: Home,
   },
   {
     path: "/cadastro",
-    name: "Cadastro",
+    name: "cadastro",
+    title: "Cadastro",
+    menu: true,
     component: Cadastro,
+  },
+  {
+    path: "*",
+    menu: false,
+    component: Home,
   },
 ];
 
